@@ -39,6 +39,7 @@ function addItems() {
 
 // function to display in a table
 function displayItems() {
+  let sum = 0;
   display.innerHTML = `
   <tr>
   <td class="px-2">S/N</td>
@@ -51,20 +52,26 @@ function displayItems() {
     `;
   // in other to display the various items added
   for (let i = 0; i < userItems.length; i++) {
+    let total = Number(parseInt(userItems[i].amount * userItems[i].price));
     display.innerHTML += `
         <tr>
         <td class="px-2 py-1 text-center">${i + 1}</td>
         <td class="px-2 py-1 text-center">${userItems[i].item}</td>
         <td class="px-2 py-1 text-center">${userItems[i].price}</td>
         <td class="px-2 py-1 text-center">${userItems[i].amount}</td>
-        <td class="px-2 py-1 text-center">${
-          userItems[i].amount * userItems[i].price
-        } </td>
+        <td class="px-2 py-1 text-center">${total} </td>
         <td class="px-2 py-1 text-center">
         <button type="button" class="btn btn-danger btn-sm"  onclick="deleteItems(${i})">Delete</button>
         <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success btn-sm"  onclick="editItems(${i})">Edit</button>
         </td>
        </tr>
+        `;
+    sum += total;
+    displayTotal.innerHTML = `
+    <tr>
+    <td class="px-5">Total</td>
+    <td class="px-5">${sum}</td>
+  </tr>
         `;
   }
 }
